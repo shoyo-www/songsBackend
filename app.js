@@ -103,3 +103,8 @@ app.get('/api/hello', (req, res) => res.json({
 
 const PORT = 3000;
 const HOST = "0.0.0.0"; 
+
+app.listen(PORT, HOST, () => {
+  const localIP = getLocalIP();
+  console.log(`Network:    http://${localIP}:${PORT}`);
+});

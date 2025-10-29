@@ -29,7 +29,6 @@ const albumSchema = new mongoose.Schema(
 );
 
 
-albumSchema.index({ idAlbum: 1 }, { unique: true });
 albumSchema.index({ strArtist: 1, strAlbum: 1 }); 
 albumSchema.index({ isTrending: 1, intChartPlace: 1 });
 albumSchema.virtual("strAlbumThumbHD").get(function () {
