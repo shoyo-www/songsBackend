@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const connectDB = require("./db");
 const fetchAndStoreSongs = require("./songs");
 const Song = require("./models/song");
 const { fetchTrendingAlbums, fetchTopCharts, getAlbums } = require("./albums");
