@@ -85,7 +85,9 @@ app.get('/', (req, res) => res.send('Hello, Express on Vercel!'));
 app.get('/api/hello', (req, res) => res.json({
   message: 'Welcome to your Node.js + Express API'
 }));
-
+mongoose.connect("mongodb+srv://shoyostriker_db_user:VZClX6xJsLI9mGAz@mysongs.tekn7cb.mongodb.net/?appName=MySongs").then(()=> {
+    console.log('conected');
+});
 app.listen(PORT,"0.0.0.0", (error) => {
     if (!error)
         console.log("Server is Successfully Running, and App is listening on port " + PORT);
