@@ -4,7 +4,6 @@ const fetchAndStoreSongs = require("./songs");
 const Song = require("./models/song");
 const { fetchTrendingAlbums, fetchTopCharts, getAlbums } = require("./albums");
 const PORT = 3000;
-connectDB();
 const app = express();
 app.use(cors());
 app.use(express.json());
