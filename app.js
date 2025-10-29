@@ -3,29 +3,16 @@ const cors = require('cors');
 const connectDB = require("./db");
 const fetchAndStoreSongs = require("./songs");
 const Song = require("./models/song");
-const { fetchTrendingAlbums, fetchTopCharts , getAlbums} = require("./albums");
-
+const { fetchTrendingAlbums, fetchTopCharts, getAlbums } = require("./albums");
+const PORT = 3000;
 connectDB();
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-function getLocalIP() {
-  const os = require('os');
-  const interfaces = os.networkInterfaces();
-  for (const name of Object.keys(interfaces)) {
-    for (const iface of interfaces[name]) {
-      if (iface.family === 'IPv4' && !iface.internal) {
-        return iface.address;
-      }
-    }
-  }
-  return 'localhost';
-}
-
 app.get("/api/songs", async (req, res) => {
   try {
-    const songs = await Song.find(); // fetch all songs
+    const songs = await Song.find();
     res.status(200).json(songs);
   } catch (error) {
     console.error("Error fetching songs:", error);
@@ -34,9 +21,7 @@ app.get("/api/songs", async (req, res) => {
 });
 
 app.get("/test", (req, res) => {
-  res.json({ 
-    hasGetSavedAlbums: typeof getAlbums === "function" 
-  });
+  res.json({ hasGetSavedAlbums: typeof getAlbums === "function" });
 });
 
 app.get("/fetch-songs", async (req, res) => {
@@ -96,15 +81,15 @@ app.get("/api/albums", async (req, res) => {
   }
 });
 
-app.get('/', (req, res) => res.send('Hello, Express!'));
+app.get('/', (req, res) => res.send('Hello, Express on Vercel!'));
 app.get('/api/hello', (req, res) => res.json({
   message: 'Welcome to your Node.js + Express API'
 }));
 
-const PORT = 3000;
-const HOST = "0.0.0.0"; 
-
-app.listen(PORT, HOST, () => {
-  const localIP = getLocalIP();
-  console.log(`Network:    http://${localIP}:${PORT}`);
-});
+app.listen(PORT,"0.0.0.0", (error) => {
+    if (!error)
+        console.log("Server is Successfully Running, and App is listening on port " + PORT);
+    else
+        console.log("Error occurred, server can't start", error);
+}
+);
